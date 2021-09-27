@@ -16,6 +16,7 @@ namespace ConsoleAppGladiators.Tests
             gladiator = new Gladiator();
 
             //Assert
+            Assert.NotEqual(0, gladiator.id);
             Assert.True(gladiator.Alive);
             Assert.InRange(gladiator.Dex, 1, 12);
             Assert.InRange(gladiator.Str, 1, 12);
@@ -40,6 +41,7 @@ namespace ConsoleAppGladiators.Tests
             gladiator = new Gladiator(name, str, dex, vit);
 
             //Assert
+            Assert.NotEqual(0, gladiator.id);
             Assert.True(gladiator.Alive);
             Assert.Equal(dex, gladiator.Dex);
             Assert.Equal(str, gladiator.Str);
@@ -47,6 +49,83 @@ namespace ConsoleAppGladiators.Tests
             Assert.Equal(hp, gladiator.HP);
             Assert.False(string.IsNullOrWhiteSpace(gladiator.Name));
             Assert.True(gladiator.Name.Length > 1);
+        }
+
+        [Fact]
+        public void PlayerGladiatorGetsUniqueIdTest()
+        {
+            //Arrange
+            string name = "Maximus";
+            int str = 12;
+            int dex = 12;
+            int vit = 12;
+            Gladiator gladiator1;
+            Gladiator gladiator2;
+            Gladiator gladiator3;
+
+            //Act
+            gladiator1 = new Gladiator(name, str, dex, vit);
+            gladiator2 = new Gladiator(name, str, dex, vit);
+            gladiator3 = new Gladiator(name, str, dex, vit);
+
+            //Assert
+            Assert.NotEqual(0, gladiator1.id);
+            Assert.NotEqual(0, gladiator2.id);
+            Assert.NotEqual(0, gladiator3.id);
+            Assert.NotEqual(gladiator1.id, gladiator2.id);
+            Assert.NotEqual(gladiator1.id, gladiator3.id);
+            Assert.NotEqual(gladiator2.id, gladiator3.id);
+
+        }
+
+        [Fact]
+        public void NpcGladiatorGetsUniqueIdTest()
+        {
+            //Arrange
+            Gladiator gladiator1;
+            Gladiator gladiator2;
+            Gladiator gladiator3;
+
+            //Act
+            gladiator1 = new Gladiator();
+            gladiator2 = new Gladiator();
+            gladiator3 = new Gladiator();
+
+            //Assert
+            Assert.NotEqual(0, gladiator1.id);
+            Assert.NotEqual(0, gladiator2.id);
+            Assert.NotEqual(0, gladiator3.id);
+            Assert.NotEqual(gladiator1.id, gladiator2.id);
+            Assert.NotEqual(gladiator1.id, gladiator3.id);
+            Assert.NotEqual(gladiator2.id, gladiator3.id);
+
+        }
+
+        [Fact]
+        public void PlayerAndNpcGladiatorsGetsUniqueIdTest()
+        {
+            //Arrange
+            string name = "Maximus";
+            int str = 12;
+            int dex = 12;
+            int vit = 12;
+            Gladiator gladiator1Player;
+            Gladiator gladiator2Npc;
+            Gladiator gladiator3Player;
+
+            //Act
+            gladiator1Player = new Gladiator(name, str, dex, vit);
+            gladiator2Npc = new Gladiator();
+            gladiator3Player = new Gladiator(name, str, dex, vit);
+
+            //Assert
+            Assert.NotEqual(0, gladiator1Player.id);
+            Assert.NotEqual(0, gladiator2Npc.id);
+            Assert.NotEqual(0, gladiator3Player.id);
+            Assert.NotEqual(gladiator1Player.id, gladiator2Npc.id);
+            Assert.NotEqual(gladiator1Player.id, gladiator3Player.id);
+            Assert.NotEqual(gladiator2Npc.id, gladiator3Player.id);
+
         }
 
         [Fact]

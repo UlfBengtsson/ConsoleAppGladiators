@@ -8,7 +8,9 @@ namespace ConsoleAppGladiators.Models
     {
         private static Random rng = new Random();
         private readonly string[] npcNames = { "Maximus", "Tetraites", "Priscus", "Spiculus" };//new string[] { }
+        private static int idCounter = 0;
 
+        public readonly int id;
         int str;
         int dex;
         int vit;
@@ -48,6 +50,7 @@ namespace ConsoleAppGladiators.Models
 
         public Gladiator()
         {
+            id = ++idCounter;
             str = rng.Next(1, 13);//rng.Next(12)+1;
             dex = rng.Next(1, 13); ;
             vit = rng.Next(1, 13); ;
@@ -58,6 +61,7 @@ namespace ConsoleAppGladiators.Models
 
         public Gladiator(string name, int str, int dex, int vit)
         {
+            id = ++idCounter;
             this.str = str;
             this.dex = dex;
             this.vit = vit;
