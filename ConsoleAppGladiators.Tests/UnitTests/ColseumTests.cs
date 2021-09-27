@@ -62,5 +62,28 @@ namespace ConsoleAppGladiators.Tests.UnitTests
             Assert.DoesNotContain(gladiator2, coloseum.AllFighters());
             Assert.Contains(gladiator3, coloseum.AllFighters());
         }
+
+        [Fact]
+        public void CantRemoveANoneExistingGladiatorFromColseum()
+        {
+            //Arrange
+            Coloseum coloseum;
+            coloseum = new Coloseum();
+            Gladiator gladiator1 = new Gladiator();
+            Gladiator gladiator2 = new Gladiator();
+            Gladiator gladiator3 = new Gladiator();
+            coloseum.AddGladiator(gladiator1);
+            coloseum.AddGladiator(gladiator2);
+            coloseum.AddGladiator(gladiator3);
+
+            //Act
+            bool result = coloseum.RemoveGladiator(int.MaxValue);//using int max to mark a none existing Id.
+
+            //Assert
+            Assert.False(result);
+            Assert.Contains(gladiator1, coloseum.AllFighters());
+            Assert.Contains(gladiator2, coloseum.AllFighters());
+            Assert.Contains(gladiator3, coloseum.AllFighters());
+        }
     }
 }
